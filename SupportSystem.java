@@ -41,9 +41,11 @@ public class SupportSystem
 
             if(input.toLowerCase().trim().equals("bye")) {
                 finished = true;
+           
             }
             else {
-                String response = responder.generateResponse();
+                    
+                String response = responder.generateResponse(input);
                 System.out.println(response);
             }
         }
