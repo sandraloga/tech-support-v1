@@ -14,27 +14,47 @@ public class Responder
 {
     private Random numero;
     private ArrayList<String> mensajes;
-     private HashMap<String,String> contesta;
+    private HashMap<HashSet<String>,String> contesta;
 
     /**
      * Construct a Responder - nothing to do
      */
     public Responder()
-    
+
     {
-        contesta = new HashMap<>();
-        contesta.put("mas", "digame mas");
-        contesta.put("menos","digame menos");
-        contesta.put("siga","siga explicandose");
-        contesta.put("cansado","Tranquilicese...");
-        
         numero = new Random();
+        contesta = new HashMap<>();
         mensajes = new ArrayList<>();
-        mensajes.add ("Siga su explicacion, por favor....");
-        mensajes.add ("Hable mas despacio....");
-        mensajes.add ("Explique son claridad ");
-        mensajes.add ("Un momento, por favor...");
-        mensajes.add ("Perfecto, siga con la explicacion");
+        
+        mensajes.add("Are you sure?");
+        mensajes.add("I need a bit more information on that.");
+        mensajes.add("What is your operating system?");
+        mensajes.add("Ok, we are working on that problem.");
+        mensajes.add("Can you give me more information?");
+
+
+        HashSet <String> set01 = new HashSet<>();
+        set01.add("free");
+        set01.add("app");
+        
+        HashSet <String> set02 = new HashSet<>();
+        set02.add("free");
+        
+        HashSet <String> set03 = new HashSet<>();
+        set03.add("app");
+        
+        HashSet <String> set04 = new HashSet<>();
+        set04.add("problem");
+        set04.add("linux");
+        set04.add("crash");
+        
+        contesta.put(set04,"Our software is not designed to run on Linux");
+        contesta.put(set01,"In the future we want to offer our software for free");
+        contesta.put(set02,"Are you speaking about free as a free beer?");
+        contesta.put(set03,"What kind of problem do you have with our app?");
+ 
+
+       
         
     }
 
@@ -44,31 +64,17 @@ public class Responder
      */
     public String generateResponse(HashSet<String> input)
     {
-       String respuesta = null;
-       Iterator <String> iterator = input.iterator();
-       boolean searching = true;
+        String respuesta = null;
+        
+        respuesta = contesta.get(input);
+
        
-       while (iterator.hasNext() && searching)
-       {
-           respuesta = contesta.get(iterator.next());
-           if (respuesta != null)
-           {
-               searching = false;
-           }
-       }
-       
-     
-       
-        if (contesta.containsKey(input))
+        if (respuesta == null)
         {
-            respuesta=contesta.get(input);
-        }
-        else{   
-            
            respuesta = mensajes.get(numero.nextInt(mensajes.size()));
         }
+       
         return respuesta;
-        
 
     }
 }
