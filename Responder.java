@@ -23,15 +23,10 @@ public class Responder
 
     {
         numero = new Random();
-        contesta = new HashMap<>();
-        mensajes = new ArrayList<>();
         
-        mensajes.add("Are you sure?");
-        mensajes.add("I need a bit more information on that.");
-        mensajes.add("What is your operating system?");
-        mensajes.add("Ok, we are working on that problem.");
-        mensajes.add("Can you give me more information?");
-
+        createDefaultResponses();
+        contesta = new HashMap<>();
+       
 
         HashSet <String> set01 = new HashSet<>();
         set01.add("free");
@@ -71,11 +66,26 @@ public class Responder
        
         if (respuesta == null)
         {
-           respuesta = mensajes.get(numero.nextInt(mensajes.size()));
+           respuesta = mensajes.remove(numero.nextInt(mensajes.size()));
+        }
+        else
+        {
+            respuesta = "Sorry , I don´t understand your question!";
         }
        
         return respuesta;
 
+    }
+    
+    private void createDefaultResponses()
+    {
+       mensajes = new ArrayList<>(); 
+       
+        mensajes.add("Are you sure?");
+        mensajes.add("I need a bit more information on that.");
+        mensajes.add("What is your operating system?");
+        mensajes.add("Ok, we are working on that problem.");
+        mensajes.add("Can you give me more information?");
     }
 }
 
